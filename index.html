@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial; margin:20px;
+background:#c8bcc0;">
+<h2 style="text-align:center; color:#01060b;"> ✨Friendship Calculator
+🤜🏻 🤛🏻 </h2>
+<!-- Center Box -->
+<div style="
+ background:white;
+ width:350px;
+ margin:auto;
+ padding:20px;
+ border-radius:10px;
+ border:1px solid #e3b6d8;
+ box-shadow:0 0 8px rgba(0,0,0,0.1);
+ text-align:center;
+">
+ <label style="font-size:18px;">Your name:</label><br>
+ <input id="name1" placeholder="ABC"
+ style="padding:8px; width:200px; margin-top:5px;
+border:1px solid #1d191d; border-radius:5px;">
+ <br><br>
+ <label style="font-size:18px;">Friend name:</label><br>
+ <input id="name2" placeholder="XYZ"
+ style="padding:8px; width:200px; margin-top:5px;
+border:1px solid #150215; border-radius:5px;">
+ <br><br>
+ <button id="calcBtn"
+ style="padding:10px 20px; background:#080708;
+color:rgb(236, 227, 227); border:none; border-radius:5px; cursor:pointer;
+font-weight:bold;">
+ Calculate Friendship %
+ </button>
+ <p id="loveResult" style="font-size:18px; margin-top:20px;
+font-weight:bold;"></p>
+</div>
+<script>
+ const n1 = document.getElementById('name1');
+ const n2 = document.getElementById('name2');
+ const calcBtn = document.getElementById('calcBtn');
+ const loveResult = document.getElementById('loveResult');
+ function computeLovePercent(a, b) {
+ const s1 = a.trim().toLowerCase();
+ const s2 = b.trim().toLowerCase();
+ if (!s1 || !s2) return null;
+ let sum = 0;
+ for (let ch of s1 + s2) {
+ sum += ch.charCodeAt(0);
+ }
+ sum += s1.length * 3 + s2.length * 7;
+ let percent = sum % 101;
+ if (percent === 100) percent = 99;
+ if (percent === 0) percent = 1;
+ return percent;
+ }
+ calcBtn.addEventListener('click', function() {
+ const a = n1.value;
+ const b = n2.value;
+ const p = computeLovePercent(a, b);
+ if (p === null) {
+ loveResult.style.color = 'crimson';
+ loveResult.textContent = 'Please enter both names.';
+ return;
+ }
+ loveResult.style.color = 'purple';
+ loveResult.textContent = `Friendship between "${a}" and "${b}"
+is ${p}% 💜 `;
+ if (p > 80) {
+ loveResult.textContent += ' — Match made in code!';
+ } else if (p < 30) {
+ loveResult.textContent += " — Keep building the relationship!";
+ }
+ });
+</script>
+</body>
+</html>
